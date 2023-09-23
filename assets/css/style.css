@@ -361,7 +361,7 @@ section {
   font-size: 16px;
   margin-right: 5px;
   color: #149ddd;
-  line-height: 0;
+  line-height: 2px;
 }
 
 .about .content p:last-child {
