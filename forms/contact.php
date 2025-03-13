@@ -7,35 +7,60 @@
   */
 
   // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+//   $receiving_email_address = 'junaed.uap@gmail.com';
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+//   if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
+//     include( $php_email_form );
+//   } else {
+//     die( 'Unable to load the "PHP Email Form" Library!');
+//   }
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
+//   $contact = new PHP_Email_Form;
+//   $contact->ajax = true;
   
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+//   $contact->to = $receiving_email_address;
+//   $contact->from_name = $_POST['name'];
+//   $contact->from_email = $_POST['email'];
+//   $contact->subject = $_POST['subject'];
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+//   // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
+//   /*
+//   $contact->smtp = array(
+//     'host' => 'example.com',
+//     'username' => 'example',
+//     'password' => 'pass',
+//     'port' => '587'
+//   );
+//   */
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+//   $contact->add_message( $_POST['name'], 'From');
+//   $contact->add_message( $_POST['email'], 'Email');
+//   $contact->add_message( $_POST['message'], 'Message', 10);
 
-  echo $contact->send();
+//   echo $contact->send();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $to = "junaed.uap@gmail.com";  // Your email
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $subject = $_POST['subject'] ?? '';
+    $message = $_POST['message'] ?? '';
+
+    if (empty($name) || empty($email) || empty($message)) {
+        echo json_encode(["error" => "All fields are required."]);
+        exit;
+    }
+
+    $headers = "From: $email\r\nReply-To: $email\r\n";
+
+    if (mail($to, $subject, $message, $headers)) {
+        echo json_encode(["success" => "Message sent successfully."]);
+    } else {
+        echo json_encode(["error" => "Failed to send message."]);
+    }
+} else {
+    echo json_encode(["error" => "Invalid request."]);
+}
 ?>
+
