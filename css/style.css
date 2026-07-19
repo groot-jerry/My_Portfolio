@@ -14,26 +14,20 @@ body {
   padding: 100px 0;
 }
 
-/* Carousel */
+/* ======================================================= */
+/* FIX: Carousel & Image Rules                             */
+/* ======================================================= */
+.carousel {
+  background-color: #111; /* Provides a clean dark framing backdrop */
+}
 .carousel-item {
-  height: 50vh;
-  min-height: 300px;
+  height: 70vh; /* Unified height container framework */
+  min-height: 400px;
 }
-.carousel-caption {
-  bottom: 220px;
-  z-index: 10;
-}
-.carousel-caption h5 {
-  font-size: 45px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 25px;
-}
-.carousel-caption p {
+.carousel-item img {
   width: 100%;
-  margin: auto;
-  font-size: 30px;
-  line-height: 1.9;
+  height: 100%;
+  object-fit: contain; /* Ensures the whole bike photo is completely visible without cuts */
 }
 .carousel-inner::before {
   content: '';
@@ -42,8 +36,32 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.4); /* Reduced overlay slightly so images pop more */
   z-index: 1;
+}
+
+/* Centered content overlays */
+.carousel-caption {
+  bottom: 10%; /* Positions titles cleanly in the lower-middle zone */
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5); /* Adds contrast behind your bike texts */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.carousel-caption h5 {
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+.carousel-caption p {
+  width: 100%;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 /* Navbar */
@@ -65,9 +83,8 @@ body {
 .navbar-light .navbar-nav .nav-link {
   color: #000;
 }
-.w-100 {
-  height: 100vh;
-}
+
+/* REMOVED the broken .w-100 height stretch rule to let Bootstrap handle grids naturally */
 
 /* Services & Portfolio Cards */
 .services .card-body i {
@@ -84,20 +101,18 @@ body {
   transform: translateY(-5px);
 }
 
-/* Contact Section */
+/* Contact Section Map Fixes */
 .map-responsive {
   position: relative;
   overflow: hidden;
   height: 400px;
-  /*padding-top: 75.25%; /* 16:9 aspect ratio */
-  /*margin-bottom: 15px;*/
 }
 .map-responsive iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150%;
-  height: 150%;
+  width: 100%;
+  height: 100%;
   border: 0;
 }
 
@@ -117,19 +132,18 @@ button[type="submit"]:hover {
   background: #0056b3;
 }
 
-/* Responsive */
+/* ======================================================= */
+/* Responsive Breakpoints                                  */
+/* ======================================================= */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .carousel-caption {
-    bottom: 370px;
+  .carousel-item {
+    height: 50vh;
   }
-  .carousel-caption p {
-    width: 100%;
+  .carousel-caption {
+    bottom: 8%;
   }
   .card {
     margin-bottom: 30px;
-  }
-  .img-area img {
-    width: 100%;
   }
 }
 
@@ -137,22 +151,23 @@ button[type="submit"]:hover {
   .navbar-nav {
     text-align: center;
   }
+  .carousel-item {
+    height: 40vh;
+  }
   .carousel-caption {
-    bottom: 125px;
+    bottom: 5%;
+    padding: 10px;
   }
   .carousel-caption h5 {
-    font-size: 17px;
-  }
-  .carousel-caption a {
-    padding: 10px 15px;
+    font-size: 18px;
+    letter-spacing: 1px;
   }
   .carousel-caption p {
-    width: 100%;
-    line-height: 1.6;
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 1.4;
   }
   .about-text {
-    padding-top: 50px;
+    padding-top: 30px;
   }
   .card {
     margin-bottom: 30px;
